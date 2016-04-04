@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:facebook="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/jibberSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@drawable/button_search"
+        android:background="@color/off_white"
+        android:gravity="right"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/myProfilePic1"
+            android:layout_width="160dp"
+            android:layout_height="160dp"></com.facebook.login.widget.ProfilePictureView>
+
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/myProfilePic3"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="left|center_vertical"></com.facebook.login.widget.ProfilePictureView>
+
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/myProfilePic2"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="right|top"></com.facebook.login.widget.ProfilePictureView>
+
+    </FrameLayout>
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/off_white"
+        android:id="@+id/searchUsersListViewFrag">
+    </ListView>
+
+</RelativeLayout>
