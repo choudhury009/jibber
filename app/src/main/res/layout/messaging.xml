@@ -40,9 +40,6 @@
             android:paddingLeft="10dp"
             android:layout_alignParentBottom="true">
 
-
-
-
         <EditText
                 android:layout_marginBottom="-4dp"
                 android:id="@+id/messageBodyField"
@@ -65,16 +62,4 @@
                 android:layout_margin="4dp"
                 android:background="@drawable/button_send" />
     </RelativeLayout>
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="9dp"-->
-        <!--android:layout_marginBottom="9dp"-->
-        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
-        <!--android:id="@+id/messageUsername"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:typeface="sans"/>-->
-
-
 </RelativeLayout>

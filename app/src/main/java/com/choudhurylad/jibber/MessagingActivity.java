@@ -49,11 +49,9 @@ public class MessagingActivity extends AppCompatActivity {
     private EditText messageBodyField;
     private MessageService.MessageServiceInterface messageService;
     private MessageAdapter messageAdapter;
-//    private ListUsersActivity listUsersActivity;
     private ListView messagesList;
     private ServiceConnection serviceConnection = new MyServiceConnection();
     private MessageClientListener messageClientListener = new MyMessageClientListener();
-    public static ArrayList<String> recipNames = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,6 @@ public class MessagingActivity extends AppCompatActivity {
         recipientId = intent.getStringExtra("RECIPIENT_ID");
         currentUserId = ParseUser.getCurrentUser().getObjectId();
         username = intent.getStringExtra("MESSAGE_USERNAME");
-//
         Toolbar myChildToolbar = (Toolbar) findViewById(R.id.my_child_toolbar);
         setSupportActionBar(myChildToolbar);
         setTitle(username);
@@ -77,7 +74,6 @@ public class MessagingActivity extends AppCompatActivity {
         messagesList = (ListView) findViewById(R.id.listMessages);
         messageAdapter = new MessageAdapter(this);
         messagesList.setAdapter(messageAdapter);
-        // special feature that removes messages once the conversation is closed!!
          populateMessageHistory();
 
         messageBodyField = (EditText) findViewById(R.id.messageBodyField);
@@ -90,9 +86,6 @@ public class MessagingActivity extends AppCompatActivity {
         });
     }
 
-    public static ArrayList recipNames() {
-        return recipNames;
-    }
     //get previous messages from parse & display
     private void populateMessageHistory() {
         String[] userIds = {currentUserId, recipientId};
@@ -127,6 +120,13 @@ public class MessagingActivity extends AppCompatActivity {
 
         messageService.sendMessage(recipientId, messageBody);
         messageBodyField.setText("");
+
+//        List<String> subscribedChannels = ParseInstallation.getCurrentInstallation().getList("channels");
+//        ParsePush push = new ParsePush();
+//        push.setChannel("Jibber");
+//        push.setMessage("The Giants just scored! It's now 2-2 against the Mets.");
+//        push.sendInBackground();
+
         ParseQuery userQuery = ParseUser.getQuery();
         userQuery.whereEqualTo("objectId", recipientId);
 
@@ -143,7 +143,6 @@ public class MessagingActivity extends AppCompatActivity {
             push.setQuery(pushQuery);
             push.setData(jsonObject);
             push.sendInBackground();
-//            recipNames.add(ParseUser.getCurrentUser().getUsername());
         }catch(Exception e){
             Log.v("Parse", "An exception has occured!");
         }
@@ -173,17 +172,13 @@ public class MessagingActivity extends AppCompatActivity {
         @Override
         public void onMessageFailed(MessageClient client, Message message,
                                     MessageFailureInfo failureInfo) {
-            Toast.makeText(MessagingActivity.this, "Message failed to send.", Toast.LENGTH_LONG).show();
+            Toast.makeText(MessagingActivity.this, "Message failed to send", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onIncomingMessage(MessageClient client, final Message message) {
             if (message.getSenderId().equals(recipientId)) {
                 final WritableMessage writableMessage = new WritableMessage(message.getRecipientIds().get(0), message.getTextBody());
-    
-                //only add message to parse database if it doesn't already exist there
-//                Toast.makeText(getApplicationContext(), "recip " + recipientId, Toast.LENGTH_LONG).show();
-//                Toast.makeText(getApplicationContext(), "current " +currentUserId, Toast.LENGTH_LONG).show();
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseMessage");
                 query.whereEqualTo("sinchId", message.getMessageId());
@@ -197,14 +192,19 @@ public class MessagingActivity extends AppCompatActivity {
                                 parseMessage.put("recipientId", recipientId);
                                 parseMessage.put("messageText", writableMessage.getTextBody());
                                 parseMessage.put("sinchId", message.getMessageId());
-//                                parseMessage.put("unread", true);
                                 parseMessage.saveInBackground();
-
                                 messageAdapter.addMessage(writableMessage, MessageAdapter.DIRECTION_INCOMING);
+                            } else {
+                                System.out.println("parseerror" + messageList.size());
+                                // check if message saving to db
                             }
+                        } else {
+                            System.out.println("parseerror" + e);
                         }
                     }
                 });
+            } else {
+
             }
         }
 

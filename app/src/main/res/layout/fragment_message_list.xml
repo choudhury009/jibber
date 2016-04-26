@@ -7,7 +7,8 @@
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="5dp"
         android:background="@color/off_white"
         android:id="@+id/usersListViewFrag">
     </ListView>

@@ -26,29 +26,30 @@
 
         <com.facebook.login.widget.ProfilePictureView
             android:id="@+id/myProfilePic1"
-            android:layout_width="160dp"
-            android:layout_height="160dp"></com.facebook.login.widget.ProfilePictureView>
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:visibility="gone"></com.facebook.login.widget.ProfilePictureView>
 
         <com.facebook.login.widget.ProfilePictureView
             android:id="@+id/myProfilePic3"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_gravity="left|center_vertical"></com.facebook.login.widget.ProfilePictureView>
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="left|center_vertical"
+            android:visibility="gone"></com.facebook.login.widget.ProfilePictureView>
 
         <com.facebook.login.widget.ProfilePictureView
             android:id="@+id/myProfilePic2"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_gravity="right|top"></com.facebook.login.widget.ProfilePictureView>
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="right|top"
+            android:visibility="gone"></com.facebook.login.widget.ProfilePictureView>
 
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/myProfilePic4"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="right|center_vertical"
+            android:visibility="gone"></com.facebook.login.widget.ProfilePictureView>
     </FrameLayout>
-
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="@color/off_white"
-        android:id="@+id/searchUsersListViewFrag">
-    </ListView>
 
 </RelativeLayout>
