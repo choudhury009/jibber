@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 //import com.facebook.FacebookSdk;
@@ -41,12 +42,12 @@ import java.util.List;
 public class LoginActivity extends Activity {
 
     private Intent intent;
-    private Intent serviceIntent;
     private View fbLoginButton;
     private String userEmail;
     private String fbName;
     private String fbSurname;
     private String fbId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +71,10 @@ public class LoginActivity extends Activity {
             protected void onPostExecute(String msg) {
                 // msg is deviceToken
                 intent = new Intent(getApplicationContext(), MainActivity.class);
-                serviceIntent = new Intent(getApplicationContext(), MessageService.class);
                 intent.putExtra("regId", msg);
                 startActivity(intent);
-                startService(serviceIntent);
             }
         }
-
-        intent = new Intent(getApplicationContext(), MainActivity.class);
-        serviceIntent = new Intent(getApplicationContext(), MessageService.class);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -145,9 +141,7 @@ public class LoginActivity extends Activity {
                                             user.put("facebookId", fbId);
                                             user.saveInBackground();
                                             intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            serviceIntent = new Intent(getApplicationContext(), MessageService.class);
                                             startActivity(intent);
-                                            startService(serviceIntent);
                                         }
                                     }
                                 });
@@ -157,9 +151,7 @@ public class LoginActivity extends Activity {
                                 user.put("facebookId", fbId);
                                 user.saveInBackground();
                                 intent = new Intent(getApplicationContext(), MainActivity.class);
-                                serviceIntent = new Intent(getApplicationContext(), MessageService.class);
                                 startActivity(intent);
-                                startService(serviceIntent);
                             }
                         }
                     }
@@ -178,7 +170,6 @@ public class LoginActivity extends Activity {
 
     @Override
     public void onDestroy() {
-        stopService(new Intent(this, MessageService.class));
         super.onDestroy();
     }
 }

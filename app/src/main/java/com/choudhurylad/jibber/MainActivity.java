@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Intent intent;
+    private Intent serviceIntent;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
     private String currentUserId;
@@ -235,9 +236,9 @@ public class MainActivity extends AppCompatActivity
 
                 return true;
             case R.id.action_logout:
-                ParseUser.logOut();
                 intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                ParseUser.logOut();
 
                 return true;
 
@@ -259,7 +260,6 @@ public class MainActivity extends AppCompatActivity
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, com.parse.ParseException e) {
                 if (e == null) {
-                    String gender = "male";
                     for (int i = 0; i < userList.size(); i++) {
                         if (userList.get(i).getObjectId().toString().equals(currentUserId)) {
                         } else {
@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity
 
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereNotEqualTo("objectId", currentUserId);
-        query.whereNotEqualTo("objectId", "2HDU94lVzB");
+//        query.whereNotEqualTo("objectId", "2HDU94lVzB");
         query.whereWithinMiles("location", point, 8);
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, com.parse.ParseException e) {
@@ -429,9 +429,11 @@ public class MainActivity extends AppCompatActivity
             public void done(List<ParseUser> user, com.parse.ParseException e) {
                 if (e == null) {
                     Intent intent = new Intent(getApplicationContext(), MessagingActivity.class);
+                    serviceIntent = new Intent(getApplicationContext(), MessageService.class);
                     intent.putExtra("RECIPIENT_ID", user.get(0).getObjectId());
                     intent.putExtra("MESSAGE_USERNAME", user.get(0).getUsername());
                     startActivity(intent);
+                    startService(serviceIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Error finding this user", Toast.LENGTH_SHORT).show();
                 }

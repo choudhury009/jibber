@@ -23,23 +23,22 @@
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fb_login_button"
-            android:layout_width="297dp"
-            android:layout_height="0dp"
+            android:layout_width="323dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_weight="0.05"
-            style="@style/FacebookLoginButton"/>
+
+            style="@style/FacebookLoginButton" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Jibber"
+        android:text="@string/app_name"
+        android:textStyle="bold"
         android:id="@+id/textView"
         android:textColor="#e0dada"
-        android:textSize="35dp"
+        android:textSize="35sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="134dp" />
@@ -48,9 +47,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Chat with nearby people!"
+        android:text="Location Messenger"
         android:id="@+id/textView4"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textColor="#e0dada" />
+
+
 </RelativeLayout>
