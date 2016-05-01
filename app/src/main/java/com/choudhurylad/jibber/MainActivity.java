@@ -253,7 +253,6 @@ public class MainActivity extends AppCompatActivity
         names = new ArrayList<String>();
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereNotEqualTo("objectId", currentUserId);
-        query.whereNotEqualTo("objectId", "2HDU94lVzB");
 //        query.whereWithinMiles("location", point, 1.0);
         // where chats have been created for other user e.g. array of chats
 
